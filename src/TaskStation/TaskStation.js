@@ -3,10 +3,8 @@ import './TaskStation.css';
 import Content from './Content/Content';
 import axios from 'axios';
 
-//const apiServer = 'http://localhost:3000/api/';
-const loginServer = 'http://10.0.48.21:8004/api/';
-//const apiServer = 'http://10.0.48.21:8009/api/';
-const apiServer = 'http://13.229.71.2:8001/endpoint/';
+const loginServer = process.env.REACT_APP_LOGIN_API;
+const apiServer =  process.env.REACT_APP_API;
 
 class TaskStation extends Component {
 

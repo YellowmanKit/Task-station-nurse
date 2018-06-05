@@ -211,7 +211,7 @@ class TaskChart extends Component {
       flexFlow: 'column nowrap'
     }
 
-    let yaxisItems = ['1','2','3'];
+    let yaxisItems = ['3','2','1'];
     let yaxis = yaxisItems.map((item,i)=>{
       return(
         <div style={Object.assign({},textStyle,{flex: 1})} key={i}>{item}</div>

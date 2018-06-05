@@ -26,10 +26,10 @@ class ResidentInfo extends Component {
     this.props.homeContent.residentId +
     '/2018-01-01/' + now.getFullYear() + '-12-31';
 
-    console.log(api)
+    //console.log(api)
 
     axios.get(api).then(res=>{
-      console.log(res.data);
+      //console.log(res.data);
       var _seasonProfiles = [];
       if(Array.isArray(res.data)){
         _seasonProfiles = res.data;
@@ -39,7 +39,7 @@ class ResidentInfo extends Component {
       var _seasonOptions = [];
       var _selectedSeasonProfile = {};
       var _selectedSeason = '';
-      for(var i=0;i<_seasonProfiles.length;i++){
+      for(var i=_seasonProfiles.length - 1;i>=0;i--){
         var now = new Date();
         var start = new Date(_seasonProfiles[i].quarterFrom);
         var end = new Date(_seasonProfiles[i].quarterTo);
@@ -73,15 +73,17 @@ class ResidentInfo extends Component {
   }
 
   onSeasonSelected(event){
-    const _selectedOption = event.target.value;
+    const _selectedSeason = event.target.value;
+    //console.log(_selectedSeason);
+
     var _selectedSeasonProfile = {};
     for(var i=0;i<this.state.seasonProfiles.length;i++){
-      if(this.generateSeasonName(new Date(this.state.seasonProfiles[i].quarterFrom),new Date(this.state.seasonProfiles[i].quarterTo)) === _selectedOption){
+      if(this.generateSeasonName(new Date(this.state.seasonProfiles[i].quarterFrom),new Date(this.state.seasonProfiles[i].quarterTo)) === _selectedSeason){
         _selectedSeasonProfile = this.state.seasonProfiles[i];
       }
     }
     this.setState({
-      selectedOption: _selectedOption,
+      selectedSeason: _selectedSeason,
       selectedSeasonProfile: _selectedSeasonProfile
     })
   }
@@ -186,7 +188,7 @@ class ResidentInfo extends Component {
       margin: '15px',
 
       flex: 1}}
-      value={this.state.selectedOption}
+      value={this.state.selectedSeason}
       onChange={this.onSeasonSelected.bind(this)}>
       {typeOptions}
     </select>;
@@ -261,8 +263,7 @@ class ResidentInfo extends Component {
             <TaskChart
             contentFunctions={this.props.contentFunctions}
             homeContent={this.props.homeContent}
-            selectedSeasonProfile={this.state.selectedSeasonProfile}
-            selectedOption={this.state.selectedOption}/>
+            selectedSeasonProfile={this.state.selectedSeasonProfile}/>
           </div>
         </div>
       </div>
