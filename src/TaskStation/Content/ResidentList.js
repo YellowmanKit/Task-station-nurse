@@ -15,11 +15,42 @@ class ResidentList extends Component {
       fontSize: '2.5em',
       fontWeight: 'bold',
       color: '#fffaf2',
-      textAlign: 'center'
+      textAlign: 'center',
+      display: 'flex',
+      flexFlow: 'row nowrap',
+      justifyContent: 'center',
+      alignItems: 'center'
     }
     return barItems.map((item,i)=>{
+      if(item === '類型'){
+        return this.typeInfo(listTopBarItemStyle, itemFlex[i])
+      }
       return <div key={item} style={Object.assign({},listTopBarItemStyle,{flex: itemFlex[i]})}> {item} </div>
     })
+  }
+
+  typeInfo(style, flex){
+    const infoBtnStyle={
+      width: '45px',
+      height: '60%',
+      cursor: 'pointer',
+      backgroundColor: '#fffaf2',
+      borderRadius: '50%',
+      fontSize: '1em',
+      color: '#989898',
+      display:'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+    return(
+      <div style={Object.assign({},style,{flex: flex})}>
+        類型
+        <div style={{width:'10%'}}/>
+        <div style={infoBtnStyle} onClick={this.props.contentFunctions.toggleTypeInfo}>
+          <div>?</div>
+        </div>
+      </div>
+    );
   }
 
   renderResidentList(){

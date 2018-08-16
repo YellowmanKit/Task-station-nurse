@@ -10,7 +10,7 @@ import taskstationIcon from '../Images/taskstation_icon.png';
 import ResidentList from './ResidentList';
 import Detail from './Detail';
 import Modal from '../Items/Modal';
-
+import TypeInfo from '../Items/TypeInfo';
 
 class Content extends Component {
 
@@ -22,6 +22,7 @@ class Content extends Component {
       loadedCount: 0,
 
       showDetail: false,
+      showTypeInfo: false,
 
       resType:[],
       homeContent:[],
@@ -42,6 +43,7 @@ class Content extends Component {
         switchDetailPage: this.switchDetailPage.bind(this),
 
         setModal: this.setModal.bind(this),
+        toggleTypeInfo: this.toggleTypeInfo.bind(this)
       },
       modalStatus: {
         status: 'none',
@@ -54,6 +56,12 @@ class Content extends Component {
   componentWillReceiveProps(newProps){
     //console.log('componentWillReceiveProps');
     this.loadApp();
+  }
+
+  toggleTypeInfo(){
+    this.setState({
+      showTypeInfo: !this.state.showTypeInfo
+    })
   }
 
   loadApp(){
@@ -310,6 +318,7 @@ class Content extends Component {
             {subcontent}
           </div>
           <Modal modalStatus={this.state.modalStatus} onCancel={()=>{this.setModal('none',null)}} height={this.getHeight()}/>
+          <TypeInfo show={this.state.showTypeInfo} contentFunctions={this.state.contentFunctions}/>
         </div>
       );
     }
