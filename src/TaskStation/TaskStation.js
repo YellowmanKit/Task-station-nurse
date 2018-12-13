@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const loginServer = process.env.REACT_APP_LOGIN_API;
 const apiServer =  process.env.REACT_APP_API;
+const apiServer2 =  process.env.REACT_APP_API2;
 
 class TaskStation extends Component {
 
@@ -20,9 +21,6 @@ class TaskStation extends Component {
         logout: this.logout.bind(this),
       }
     }
-    var winFeature =
-        'location=no,toolbar=no,menubar=no,scrollbars=yes,resizable=yes';
-    window.open('Result.html','null',winFeature);
   }
 
   login(password){
@@ -54,6 +52,7 @@ class TaskStation extends Component {
       <div>
         <Content
         apiServer={apiServer}
+        apiServer2={apiServer2}
         logStatus={this.state.logStatus}
         mainFunctions={this.state.mainFunctions}/>
       </div>

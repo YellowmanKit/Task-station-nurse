@@ -10,6 +10,7 @@ class ResidentRow extends Component {
       resTypes: props.contentFunctions.getResType(),
       currentResType: props.homeContent.residentTypeId
     }
+    this.profile = this.props.contentFunctions.getProfileByMemId(this.props.homeContent.residentId);
   }
 
   /*tryHandleSelectResType(event){
@@ -80,11 +81,14 @@ class ResidentRow extends Component {
       marginRight: '1px',
       marginBottom: '1px'
     }
-
+    //console.log(this.props.homeContent);
     return(
       <div style={Object.assign({},residentRowStyle)}>
         <div style={residentRowItemStyle}>
-          {this.props.homeContent.residentName}
+          {this.profile && this.profile.BedNo}
+        </div>
+        <div style={residentRowItemStyle}>
+          {this.props.homeContent.residentName }
         </div>
         <div style={residentRowItemStyle}>
           {this.props.homeContent.stamp}

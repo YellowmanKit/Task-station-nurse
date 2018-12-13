@@ -26,6 +26,7 @@ class Content extends Component {
 
       resType:[],
       homeContent:[],
+      profiles: [],
       detailToCheck: {
         homeContent: {}
       },
@@ -38,6 +39,8 @@ class Content extends Component {
         getApi: this.getApi.bind(this),
         getHeight: this.getHeight.bind(this),
         getResType: this.getResType.bind(this),
+
+        getProfileByMemId: this.getProfileByMemId.bind(this),
 
         showDetail: this.showDetail.bind(this),
         switchDetailPage: this.switchDetailPage.bind(this),
@@ -80,6 +83,14 @@ class Content extends Component {
         loadedCount: this.state.loadedCount + 1
       });
       //console.log(this.state.homeContent);
+    });
+
+    axios.get(this.props.apiServer2 + 'getResBedPrfl/').then(res=>{
+      console.log(res.data);
+      this.setState({
+        profiles: res.data.ResBedPrfl,
+        loadedCount: this.state.loadedCount + 1
+      });
     });
   }
 
@@ -215,6 +226,16 @@ class Content extends Component {
     })
   }
 
+  getProfileByMemId(memId){
+    const profiles = this.state.profiles;
+    for(var i=0;i<profiles.length;i++){
+      if(memId === profiles[i].MemID){
+        return profiles[i];
+      }
+    }
+    return null;
+  }
+
   render() {
 
     window.oncontextmenu = function(event) {
@@ -223,7 +244,7 @@ class Content extends Component {
       return false;
     };
 
-    if(this.props.logStatus.logged && this.state.loadedCount < 2){
+    if(this.props.logStatus.logged && this.state.loadedCount < 3){
       return <div/>
     }
 
@@ -259,6 +280,9 @@ class Content extends Component {
 
       //let title = '每日小任務' + profileName;
       let title = '每日小任務';
+      if(this.state.showDetail){
+        title += ' (' + this.state.detailToCheck.homeContent.residentName + ')';
+      }
 
       let iconStyle = {
         minWidth: '70px',

@@ -127,13 +127,14 @@ class TaskChart extends Component {
   }
 
   renderBar(length){
+    //console.log(length);
     return(
       <div style={{flex: 1,display: 'flex',flexFlow: 'column nowrap'}}>
-        <div style={{flex: length === 3?1:0,backgroundColor: 'transparent'}}>
+        <div style={{flex: 1,backgroundColor: length === 3?'#77CBC6':'transparent'}}>
         </div>
-        <div style={{flex: length >= 2?1:0,backgroundColor: '#77CBC6'}}>
+        <div style={{flex: 1,backgroundColor: length >= 2?'#77CBC6':'transparent'}}>
         </div>
-        <div style={{flex: length >= 1?1:0,backgroundColor: '#77CBC6'}}>
+        <div style={{flex: 1,backgroundColor: length >= 1?'#77CBC6':'transparent'}}>
         </div>
       </div>
     )

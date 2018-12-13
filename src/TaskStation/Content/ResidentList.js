@@ -5,8 +5,8 @@ import ResidentRow from '../Items/ResidentRow';
 class ResidentList extends Component {
 
   renderListTopBarItems(){
-    let barItems = ['姓名','印花','等級','類型','詳細資料'];
-    let itemFlex = [10,10,10,5,10];
+    let barItems = ['房間-床號','姓名','印花','等級','類型','詳細資料'];
+    let itemFlex = [10,10,10,10,5,10];
 
     let listTopBarItemStyle = {
       height: '75px',
@@ -23,13 +23,13 @@ class ResidentList extends Component {
     }
     return barItems.map((item,i)=>{
       if(item === '類型'){
-        return this.typeInfo(listTopBarItemStyle, itemFlex[i])
+        return this.typeInfo(listTopBarItemStyle, itemFlex[i], i)
       }
       return <div key={item} style={Object.assign({},listTopBarItemStyle,{flex: itemFlex[i]})}> {item} </div>
     })
   }
 
-  typeInfo(style, flex){
+  typeInfo(style, flex, i){
     const infoBtnStyle={
       width: '45px',
       height: '60%',
@@ -43,7 +43,7 @@ class ResidentList extends Component {
       alignItems: 'center'
     }
     return(
-      <div style={Object.assign({},style,{flex: flex})}>
+      <div key={i} style={Object.assign({},style,{flex: flex})}>
         類型
         <div style={{width:'10%'}}/>
         <div style={infoBtnStyle} onClick={this.props.contentFunctions.toggleTypeInfo}>
